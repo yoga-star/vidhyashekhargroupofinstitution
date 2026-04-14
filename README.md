@@ -30,5 +30,5 @@ Affiliated to RGUHS, Bangalore City University, Paramedical Board of Karnataka, 
 ## Contact
 
 **Address:** NH-4, Tumkur Road, Nelamangala Town, Bengaluru, Karnataka 562123
-**Phone:** +91 98765 43210
+**Phone:** +91 99029 88889
 **Email:** info@vidhyashekhargroupofinstitution.com

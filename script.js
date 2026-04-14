@@ -212,7 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.getElementById('modalClose');
 
   function openModal() {
-    modal?.classList.add('active');
+    if (!modal) return; // Guard: if no modal on page, do nothing
+    modal.classList.add('active');
     overlay?.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -222,21 +223,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
-  // Auto-show popup after 8 seconds (only once per session)
+  // Auto-show popup after 12 seconds (only once per session)
   if (modal && !sessionStorage.getItem('popupShown')) {
     setTimeout(() => {
       openModal();
       sessionStorage.setItem('popupShown', 'true');
-    }, 8000);
+    }, 12000);
   }
 
   closeBtn?.addEventListener('click', closeModal);
   overlay?.addEventListener('click', closeModal);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // Any "Apply Now" or "enquiry-trigger" button opens the popup
+  // Any "Apply Now" or "enquiry-trigger" button opens the popup.
+  // If the modal doesn't exist on this page, let the link navigate normally (don't preventDefault).
   document.querySelectorAll('.enquiry-trigger').forEach(btn => {
-    btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    btn.addEventListener('click', (e) => {
+      if (!modal) return; // no modal on this page — let href navigate
+      e.preventDefault();
+      openModal();
+    });
   });
 
   // Popup form submit
