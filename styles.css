@@ -303,6 +303,7 @@ input,select,textarea{font:inherit;border:none;outline:none;width:100%}
 .footer-about{max-width:300px}
 .footer-about .logo{margin-bottom:16px}
 .footer-about .logo-mark{background:rgba(255,255,255,.1);color:var(--white)}
+.footer-about .logo-img{background:#fff;border-radius:12px;padding:6px;width:52px;height:52px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
 .footer-about .logo-text strong{color:var(--white)}
 .footer-about .logo-text small{color:rgba(255,255,255,.4)}
 .footer-about p{font-size:14px;line-height:1.7;margin-bottom:20px}
