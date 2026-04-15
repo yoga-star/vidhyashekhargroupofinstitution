@@ -15,20 +15,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== NAVBAR SCROLL =====
   const navbar = document.getElementById('navbar');
   const topbar = document.querySelector('.topbar');
+  const ticker = document.querySelector('.fraud-ticker');
   let topbarH = topbar ? topbar.offsetHeight : 0;
+  let tickerH = ticker ? ticker.offsetHeight : 0;
 
   function handleScroll() {
     const y = window.scrollY;
     if (y > topbarH) {
       navbar.classList.add('scrolled');
-      navbar.style.top = '0';
+      navbar.style.top = tickerH + 'px';
     } else {
       navbar.classList.remove('scrolled');
-      navbar.style.top = topbarH - y + 'px';
+      navbar.style.top = (tickerH + topbarH - y) + 'px';
     }
   }
   // Set initial position
-  navbar.style.top = topbarH + 'px';
+  navbar.style.top = (tickerH + topbarH) + 'px';
+  // Recalculate on resize (font-loading shifts can change topbar/ticker height)
+  window.addEventListener('resize', () => {
+    topbarH = topbar ? topbar.offsetHeight : 0;
+    tickerH = ticker ? ticker.offsetHeight : 0;
+    handleScroll();
+  });
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
