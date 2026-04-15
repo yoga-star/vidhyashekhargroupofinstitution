@@ -431,17 +431,24 @@ input,select,textarea{font:inherit;border:none;outline:none;width:100%}
 .leader-quote{font-size:1.1rem}
 }
 
-/* ===== FRAUD WARNING BANNER ===== */
-.fraud-banner{background:linear-gradient(90deg,#7f1d1d,#b91c1c,#dc2626);color:#fff;padding:10px 0;font-size:13.5px;font-weight:500;text-align:center;position:relative;z-index:99}
-.fraud-banner .container{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
-.fraud-banner svg{flex-shrink:0;animation:fraudPulse 2s ease-in-out infinite}
-.fraud-banner strong{font-weight:700;letter-spacing:.3px;text-transform:uppercase;font-size:12.5px}
-.fraud-banner a{color:#fff;text-decoration:underline;font-weight:600}
-@keyframes fraudPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(.92)}}
+/* ===== FRAUD WARNING TICKER ===== */
+.fraud-ticker{display:flex;align-items:stretch;background:#fff5f5;border-top:1px solid #fecaca;border-bottom:1px solid #fecaca;overflow:hidden;position:relative;z-index:50;font-size:13px;color:#7f1d1d;height:36px}
+.fraud-ticker-icon{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;padding:0 22px 0 16px;font-weight:800;font-size:11px;letter-spacing:.7px;text-transform:uppercase;flex-shrink:0;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.fraud-ticker-icon svg{flex-shrink:0;animation:fraudPulse 1.4s ease-in-out infinite}
+.fraud-ticker-track{flex:1;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%)}
+.fraud-ticker-row{display:flex;align-items:center;gap:24px;flex-shrink:0;white-space:nowrap;animation:fraudScroll 48s linear infinite;padding-left:24px}
+.fraud-ticker-row span{font-weight:500}
+.fraud-ticker-row strong{font-weight:800;color:#991b1b}
+.fraud-ticker-row a{color:#dc2626;text-decoration:underline;font-weight:700}
+.fraud-ticker-dot{color:#fca5a5;font-size:10px}
+.fraud-ticker:hover .fraud-ticker-row{animation-play-state:paused}
+@keyframes fraudPulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fraudScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:640px){
-.fraud-banner{font-size:12px;padding:8px 0}
-.fraud-banner .container{gap:8px}
-.fraud-banner strong{font-size:11px}
+.fraud-ticker{height:30px;font-size:11.5px}
+.fraud-ticker-icon{padding:0 18px 0 12px;font-size:9.5px;gap:5px}
+.fraud-ticker-icon svg{width:11px;height:11px}
+.fraud-ticker-row{animation-duration:34s;gap:18px;padding-left:18px}
 }
 
 /* ===== ACCREDITATION LOGOS BAND ===== */
