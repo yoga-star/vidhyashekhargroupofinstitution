@@ -106,6 +106,9 @@
 .card-grid-3{grid-template-columns:repeat(2,1fr)}
 .card-grid-4{grid-template-columns:repeat(2,1fr)}
 }
+@media(max-width:860px){
+.chairman-layout{grid-template-columns:1fr !important;gap:32px !important;max-width:560px !important}
+}
 @media(max-width:768px){
 .page-hero{padding:120px 0 48px}
 .card-grid-3,.card-grid-2,.card-grid-4{grid-template-columns:1fr}
