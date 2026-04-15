@@ -454,21 +454,20 @@ body{padding-top:30px}
 }
 
 /* ===== ACCREDITATION LOGOS BAND ===== */
-.accred-band{padding:48px 0;background:#fff;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
-.accred-title{text-align:center;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray-400);margin-bottom:28px}
-.accred-row{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-.accred-item{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-width:100px;transition:transform .25s,opacity .25s;opacity:.78}
-.accred-item:hover{opacity:1;transform:translateY(-2px)}
-.accred-logo{width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--primary),#1e63a8);color:#fff;border-radius:50%;font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:.5px;box-shadow:0 8px 20px rgba(3,44,89,.18)}
-.accred-logo.l-aicte{background:linear-gradient(135deg,#1e3a8a,#2563eb)}
-.accred-logo.l-govt{background:linear-gradient(135deg,#15803d,#22c55e)}
-.accred-logo.l-bcu{background:linear-gradient(135deg,#7c2d12,#dc2626)}
-.accred-logo.l-rguhs{background:linear-gradient(135deg,#5b21b6,#8b5cf6)}
-.accred-logo.l-pmb{background:linear-gradient(135deg,#0e7490,#06b6d4)}
-.accred-name{font-size:12.5px;font-weight:700;color:var(--gray-700);line-height:1.25}
-.accred-sub{font-size:11px;color:var(--gray-400);font-weight:500}
+.accred-band{padding:54px 0;background:#fff;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
+.accred-title{text-align:center;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray-400);margin-bottom:34px}
+.accred-row{display:flex;align-items:center;justify-content:center;gap:42px;flex-wrap:wrap}
+.accred-item{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;min-width:110px;transition:transform .25s,opacity .25s;opacity:.85}
+.accred-item:hover{opacity:1;transform:translateY(-3px)}
+.accred-logo{width:88px;height:88px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:50%;padding:10px;box-shadow:0 6px 18px rgba(3,44,89,.10),0 0 0 1px var(--gray-100);transition:box-shadow .25s}
+.accred-item:hover .accred-logo{box-shadow:0 10px 24px rgba(3,44,89,.18),0 0 0 1px var(--gray-200)}
+.accred-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.accred-name{font-size:13px;font-weight:700;color:var(--gray-700);line-height:1.25}
+.accred-sub{font-size:11px;color:var(--gray-400);font-weight:500;letter-spacing:.3px;text-transform:uppercase}
 @media(max-width:640px){
-.accred-row{gap:24px}
-.accred-logo{width:54px;height:54px;font-size:15px}
+.accred-row{gap:22px}
+.accred-item{min-width:80px}
+.accred-logo{width:64px;height:64px;padding:7px}
 .accred-name{font-size:11px}
+.accred-sub{font-size:10px}
 }
