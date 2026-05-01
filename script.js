@@ -12,31 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fallback: hide after 3s even if load event doesn't fire
   setTimeout(() => preloader?.classList.add('hide'), 3000);
 
-  // ===== NAVBAR SCROLL =====
+  // ===== STICKY HEADER STACK (ticker + topbar + navbar) =====
   const navbar = document.getElementById('navbar');
   const topbar = document.querySelector('.topbar');
   const ticker = document.querySelector('.fraud-ticker');
   let topbarH = topbar ? topbar.offsetHeight : 0;
   let tickerH = ticker ? ticker.offsetHeight : 0;
 
-  function handleScroll() {
-    const y = window.scrollY;
-    if (y > topbarH) {
-      navbar.classList.add('scrolled');
-      navbar.style.top = tickerH + 'px';
-    } else {
-      navbar.classList.remove('scrolled');
-      navbar.style.top = (tickerH + topbarH - y) + 'px';
-    }
-  }
-  // Set initial position
-  navbar.style.top = (tickerH + topbarH) + 'px';
-  // Recalculate on resize (font-loading shifts can change topbar/ticker height)
-  window.addEventListener('resize', () => {
+  function layoutStickyStack() {
     topbarH = topbar ? topbar.offsetHeight : 0;
     tickerH = ticker ? ticker.offsetHeight : 0;
-    handleScroll();
-  });
+    if (topbar) topbar.style.top = tickerH + 'px';
+    navbar.style.top = (tickerH + topbarH) + 'px';
+    document.body.style.paddingTop = (tickerH + topbarH) + 'px';
+  }
+
+  function handleScroll() {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }
+
+  layoutStickyStack();
+  // Re-measure after fonts load (changes header height on first paint)
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(layoutStickyStack);
+  }
+  window.addEventListener('resize', layoutStickyStack);
   window.addEventListener('scroll', handleScroll, { passive: true });
   handleScroll();
 
