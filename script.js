@@ -139,18 +139,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('.tab');
   const panels = document.querySelectorAll('.panel');
 
+  function activateTab(tabKey) {
+    if (!tabKey) return;
+    let matched = false;
+    tabs.forEach(t => {
+      if (t.dataset.tab === tabKey) {
+        t.classList.add('active');
+        matched = true;
+      } else {
+        t.classList.remove('active');
+      }
+    });
+    if (!matched) return;
+    panels.forEach(p => {
+      p.classList.toggle('active', p.id === 'panel-' + tabKey);
+    });
+  }
+
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
+    tab.addEventListener('click', () => activateTab(tab.dataset.tab));
+  });
 
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  // Honour URL hash on load — e.g. fees.html#nursing opens the Nursing tab
+  if (tabs.length && window.location.hash) {
+    const hashKey = window.location.hash.replace(/^#/, '');
+    if (hashKey) {
+      activateTab(hashKey);
+      // Smooth-scroll to the tabs after a short delay so layout settles
+      setTimeout(() => {
+        const el = document.querySelector('.tabs');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 250);
+    }
+  }
+  // React to hash changes (e.g. user clicks another in-page link)
+  window.addEventListener('hashchange', () => {
+    activateTab(window.location.hash.replace(/^#/, ''));
+  });
 
-      panels.forEach(p => {
-        p.classList.remove('active');
-        if (p.id === 'panel-' + target) {
-          p.classList.add('active');
-        }
+  // ===== PROGRAMME LEVEL FILTERS (homepage) =====
+  const progFilters = document.querySelectorAll('.prog-filter');
+  const progCards = document.querySelectorAll('.prog-card[data-level]');
+
+  progFilters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const level = btn.dataset.level;
+      progFilters.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      progCards.forEach(card => {
+        const show = level === 'all' || card.dataset.level === level;
+        card.classList.toggle('hidden', !show);
       });
     });
   });
