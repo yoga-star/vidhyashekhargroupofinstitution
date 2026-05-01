@@ -177,19 +177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     activateTab(window.location.hash.replace(/^#/, ''));
   });
 
-  // ===== PROGRAMME CATEGORY TABS (homepage editorial list) =====
-  const progTabs = document.querySelectorAll('.progs-tab');
-  const progPanels = document.querySelectorAll('.progs-panel');
-
-  progTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const cat = tab.dataset.cat;
-      progTabs.forEach(t => t.classList.toggle('active', t === tab));
-      progPanels.forEach(panel => {
-        panel.classList.toggle('active', panel.dataset.cat === cat);
-      });
-    });
-  });
 
   // ===== BACK TO TOP =====
   const btt = document.getElementById('btt');
