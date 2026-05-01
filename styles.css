@@ -508,3 +508,22 @@ body{padding-top:30px}
   .exp-num{font-size:1.8rem!important}
 }
 
+
+/* ===== COOKIE CONSENT BANNER ===== */
+.consent-banner{position:fixed;bottom:16px;left:16px;right:16px;max-width:680px;margin:0 auto;background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:18px 22px;box-shadow:0 18px 48px rgba(3,44,89,.18);z-index:10000;display:flex;align-items:center;gap:20px;flex-wrap:wrap;transform:translateY(calc(100% + 32px));opacity:0;transition:transform .4s cubic-bezier(.4,0,.2,1),opacity .4s}
+.consent-banner.show{transform:translateY(0);opacity:1}
+.consent-text{flex:1;min-width:240px}
+.consent-text strong{display:block;font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:4px;font-family:var(--font-display)}
+.consent-text p{font-size:12.5px;color:var(--gray-600);margin:0;line-height:1.55}
+.consent-text a{color:var(--primary);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.consent-text a:hover{color:var(--primary-light)}
+.consent-actions{display:flex;gap:8px;flex-shrink:0}
+.consent-btn{padding:9px 20px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--gray-200);background:#fff;color:var(--gray-700);font-family:var(--font)}
+.consent-btn:hover{border-color:var(--gray-400)}
+.consent-btn.consent-accept{background:var(--primary);color:#fff;border-color:var(--primary)}
+.consent-btn.consent-accept:hover{background:var(--primary-light);border-color:var(--primary-light)}
+@media(max-width:640px){
+  .consent-banner{padding:16px;gap:12px;bottom:12px;left:12px;right:12px}
+  .consent-actions{width:100%}
+  .consent-btn{flex:1;padding:10px 14px}
+}

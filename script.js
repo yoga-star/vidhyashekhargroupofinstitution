@@ -292,3 +292,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// ===== COOKIE CONSENT BANNER (DPDP Act / GDPR + GA4 Consent Mode v2) =====
+(function () {
+  // If user already decided, do nothing
+  try { if (localStorage.getItem('vsetConsent')) return; } catch (e) { return; }
+
+  // Determine if we're in /blog/ or root for the privacy.html link
+  const prefix = location.pathname.includes('/blog/') ? '../' : '';
+
+  const banner = document.createElement('div');
+  banner.id = 'consentBanner';
+  banner.className = 'consent-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Cookie consent');
+  banner.innerHTML = `
+    <div class="consent-text">
+      <strong>We use cookies</strong>
+      <p>We use cookies to improve your experience and understand how visitors use our site. You can accept or reject analytics cookies at any time. <a href="${prefix}privacy.html">Privacy Policy</a></p>
+    </div>
+    <div class="consent-actions">
+      <button class="consent-btn consent-reject" type="button">Reject</button>
+      <button class="consent-btn consent-accept" type="button">Accept</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  // Slide in after a tiny delay so the transition fires
+  setTimeout(() => banner.classList.add('show'), 80);
+
+  function setConsent(choice) {
+    try { localStorage.setItem('vsetConsent', choice); } catch (e) {}
+    if (choice === 'accepted' && typeof gtag === 'function') {
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted'
+      });
+    }
+    banner.classList.remove('show');
+    setTimeout(() => banner.remove(), 380);
+  }
+
+  banner.querySelector('.consent-accept').addEventListener('click', () => setConsent('accepted'));
+  banner.querySelector('.consent-reject').addEventListener('click', () => setConsent('rejected'));
+})();
