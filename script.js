@@ -177,18 +177,16 @@ document.addEventListener('DOMContentLoaded', () => {
     activateTab(window.location.hash.replace(/^#/, ''));
   });
 
-  // ===== PROGRAMME LEVEL FILTERS (homepage) =====
-  const progFilters = document.querySelectorAll('.prog-filter');
-  const progCards = document.querySelectorAll('.prog-card[data-level]');
+  // ===== PROGRAMME CATEGORY TABS (homepage editorial list) =====
+  const progTabs = document.querySelectorAll('.progs-tab');
+  const progPanels = document.querySelectorAll('.progs-panel');
 
-  progFilters.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const level = btn.dataset.level;
-      progFilters.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      progCards.forEach(card => {
-        const show = level === 'all' || card.dataset.level === level;
-        card.classList.toggle('hidden', !show);
+  progTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const cat = tab.dataset.cat;
+      progTabs.forEach(t => t.classList.toggle('active', t === tab));
+      progPanels.forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.cat === cat);
       });
     });
   });
