@@ -4,14 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ===== PRELOADER =====
-  const preloader = document.getElementById('preloader');
-  window.addEventListener('load', () => {
-    setTimeout(() => preloader?.classList.add('hide'), 600);
-  });
-  // Fallback: hide after 3s even if load event doesn't fire
-  setTimeout(() => preloader?.classList.add('hide'), 3000);
-
   // ===== STICKY HEADER STACK (ticker + topbar + navbar) =====
   const navbar = document.getElementById('navbar');
   const topbar = document.querySelector('.topbar');
