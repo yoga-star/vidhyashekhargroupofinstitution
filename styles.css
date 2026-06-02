@@ -430,28 +430,29 @@ input,select,textarea{font:inherit;border:none;outline:none;width:100%}
 .leader-quote{font-size:1.1rem}
 }
 
-/* ===== FRAUD WARNING TICKER ===== */
-body{padding-top:76px}
-.fraud-ticker{display:flex;align-items:stretch;background:#fff5f5;border-bottom:1px solid #fecaca;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:1100;font-size:13px;color:#7f1d1d;height:36px;box-shadow:0 2px 8px rgba(127,29,29,.08)}
-.fraud-ticker-icon{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;padding:0 22px 0 16px;font-weight:800;font-size:11px;letter-spacing:.7px;text-transform:uppercase;flex-shrink:0;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
-.fraud-ticker-icon svg{flex-shrink:0;animation:fraudPulse 1.4s ease-in-out infinite}
-.fraud-ticker-track{flex:1;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%)}
-.fraud-ticker-row{display:flex;align-items:center;gap:24px;flex-shrink:0;white-space:nowrap;animation:fraudScroll 48s linear infinite;padding-left:24px}
-.fraud-ticker-row span{font-weight:500}
-.fraud-ticker-row strong{font-weight:800;color:#991b1b}
-.fraud-ticker-row a{color:#dc2626;text-decoration:underline;font-weight:700}
-.fraud-ticker-dot{color:#fca5a5;font-size:10px}
-.fraud-ticker:hover .fraud-ticker-row{animation-play-state:paused}
-@keyframes fraudPulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes fraudScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ===== ADMISSIONS INFO TICKER (formerly fraud ticker) ===== */
+body{padding-top:36px}
+.info-ticker{display:flex;align-items:stretch;background:linear-gradient(90deg,#eff6ff 0%,#fef3c7 50%,#eff6ff 100%);border-bottom:1px solid #cbd5e9;overflow:hidden;position:fixed;top:0;left:0;right:0;z-index:1100;font-size:13px;color:var(--primary);height:36px;box-shadow:0 2px 8px rgba(3,44,89,.08)}
+.info-ticker-icon{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--primary),#064a8a);color:#fff;padding:0 22px 0 16px;font-weight:800;font-size:11px;letter-spacing:.7px;text-transform:uppercase;flex-shrink:0;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.info-ticker-icon svg{flex-shrink:0;animation:infoPulse 2.4s ease-in-out infinite}
+.info-ticker-track{flex:1;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 30px,#000 calc(100% - 30px),transparent 100%)}
+.info-ticker-row{display:flex;align-items:center;gap:24px;flex-shrink:0;white-space:nowrap;animation:infoScroll 60s linear infinite;padding-left:24px}
+.info-ticker-row span{font-weight:500}
+.info-ticker-row strong{font-weight:800;color:var(--primary)}
+.info-ticker-row a{color:var(--primary);text-decoration:none;font-weight:700;border-bottom:1px dotted var(--primary);transition:border-color .2s}
+.info-ticker-row a:hover{border-bottom-color:var(--accent)}
+.info-ticker-dot{color:var(--accent);font-size:14px;font-weight:bold}
+.info-ticker:hover .info-ticker-row{animation-play-state:paused}
+@keyframes infoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes infoScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(max-width:640px){
-body{padding-top:66px}
-.topbar{top:30px}
-.fraud-ticker{height:30px;font-size:11.5px}
-.fraud-ticker-icon{padding:0 18px 0 12px;font-size:9.5px;gap:5px}
-.fraud-ticker-icon svg{width:11px;height:11px}
-.fraud-ticker-row{animation-duration:34s;gap:18px;padding-left:18px}
+  body{padding-top:30px}
+  .info-ticker{height:30px;font-size:11.5px}
+  .info-ticker-icon{padding:0 18px 0 12px;font-size:9.5px;gap:5px}
+  .info-ticker-icon svg{width:11px;height:11px}
+  .info-ticker-row{animation-duration:44s;gap:18px;padding-left:18px}
 }
+
 
 /* ===== ACCREDITATION LOGOS BAND ===== */
 .accred-band{padding:54px 0;background:#fff;border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100)}
