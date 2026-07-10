@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== STICKY HEADER STACK (ticker + topbar + navbar) =====
   const navbar = document.getElementById('navbar');
   const topbar = document.querySelector('.topbar');
-  const ticker = document.querySelector('.fraud-ticker');
+  const ticker = document.querySelector('.hire-bar, .fraud-ticker');
   let topbarH = topbar ? topbar.offsetHeight : 0;
   let tickerH = ticker ? ticker.offsetHeight : 0;
 
