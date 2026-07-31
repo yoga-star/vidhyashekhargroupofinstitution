@@ -359,5 +359,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let x0 = null;
   track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive:true });
   track.addEventListener('touchend', e => { if(x0===null) return; const dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 40){ dx < 0 ? next() : prev(); } x0 = null; });
+  // Click animation → then navigate to the slide's page
+  slides.forEach(s => {
+    const flash = document.createElement('span');
+    flash.className = 'bslide-flash';
+    s.appendChild(flash);
+    s.addEventListener('click', e => {
+      // let new-tab / modifier clicks behave normally
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      const href = s.getAttribute('href');
+      if (!href) return;
+      e.preventDefault();
+      if (s.classList.contains('bslide-clicked')) return;
+      s.classList.add('bslide-clicked');
+      const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(() => { window.location.href = href; }, reduce ? 0 : 300);
+    });
+  });
+
   render(); start();
 })();
