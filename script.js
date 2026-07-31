@@ -330,3 +330,34 @@ document.addEventListener('DOMContentLoaded', () => {
   banner.querySelector('.consent-accept').addEventListener('click', () => setConsent('accepted'));
   banner.querySelector('.consent-reject').addEventListener('click', () => setConsent('rejected'));
 })();
+
+/* ===== BANNER SLIDER ===== */
+(function(){
+  const slider = document.getElementById('bannerSlider');
+  if(!slider) return;
+  const track = slider.querySelector('#bslideTrack');
+  const slides = Array.from(track.children).filter(n => n.nodeType === 1 && n.tagName === 'A');
+  const dotsWrap = slider.querySelector('#bslideDots');
+  if(slides.length <= 1){ slider.classList.add('single'); return; }
+  let i = 0, timer = null;
+  slides.forEach((_, idx) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to banner ' + (idx + 1));
+    b.addEventListener('click', () => go(idx));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+  function render(){ track.style.transform = 'translateX(-' + (i * 100) + '%)'; dots.forEach((d, idx) => d.classList.toggle('active', idx === i)); }
+  function go(n){ i = (n + slides.length) % slides.length; render(); restart(); }
+  const next = () => go(i + 1), prev = () => go(i - 1);
+  slider.querySelector('.bslide-next').addEventListener('click', next);
+  slider.querySelector('.bslide-prev').addEventListener('click', prev);
+  function start(){ timer = setInterval(next, 5000); }
+  function restart(){ clearInterval(timer); start(); }
+  slider.addEventListener('mouseenter', () => clearInterval(timer));
+  slider.addEventListener('mouseleave', start);
+  let x0 = null;
+  track.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive:true });
+  track.addEventListener('touchend', e => { if(x0===null) return; const dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 40){ dx < 0 ? next() : prev(); } x0 = null; });
+  render(); start();
+})();
