@@ -369,6 +369,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
       const href = s.getAttribute('href');
       if (!href) return;
+      // Download links (e.g. brochure PDF): let the browser download natively, just flash
+      if (s.hasAttribute('download')) {
+        s.classList.add('bslide-clicked');
+        setTimeout(() => s.classList.remove('bslide-clicked'), 400);
+        return;
+      }
       e.preventDefault();
       if (s.classList.contains('bslide-clicked')) return;
       s.classList.add('bslide-clicked');
