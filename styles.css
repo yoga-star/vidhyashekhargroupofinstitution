@@ -560,3 +560,12 @@ body{padding-top:34px}
 .bslide-dots button.active{background:#fff;transform:scale(1.4)}
 .banner-slider.single .bslide-arrow,.banner-slider.single .bslide-dots{display:none}
 @media(max-width:640px){.bslide-arrow{width:34px;height:34px;font-size:20px}.bslide-prev{left:10px}.bslide-next{right:10px}}
+
+/* ===== BROCHURE DOWNLOAD BAND ===== */
+.brochure-band{padding:56px 0;background:#fff}
+.brochure-link{display:block;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg);transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s}
+.brochure-link img{width:100%;height:auto;display:block;aspect-ratio:1920/500;object-fit:cover;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.brochure-link:hover{transform:translateY(-4px);box-shadow:var(--shadow-xl)}
+.brochure-link:hover img{transform:scale(1.03)}
+.brochure-link:active{transform:translateY(-1px)}
+@media(prefers-reduced-motion:reduce){.brochure-link:hover,.brochure-link:hover img{transform:none}}
