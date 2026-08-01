@@ -200,25 +200,43 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ===== FORM HANDLING =====
+  // Build a WhatsApp lead message from a form's fields and open it,
+  // so enquiries actually reach the admissions team (no backend needed).
+  const ADMISSIONS_WA = '919902988889';
+  function leadWhatsAppURL(formEl) {
+    const val = sel => { const el = formEl.querySelector(sel); return el ? el.value.trim() : ''; };
+    const name = val('input[type="text"]');
+    const email = val('input[type="email"]');
+    const phone = val('input[type="tel"]');
+    const prog = val('select');
+    const msg = val('textarea');
+    let t = 'New Admission Enquiry (from website)';
+    t += '\nName: ' + name;
+    t += '\nPhone: ' + phone;
+    if (email) t += '\nEmail: ' + email;
+    if (prog) t += '\nProgramme: ' + prog;
+    if (msg) t += '\nMessage: ' + msg;
+    return 'https://wa.me/' + ADMISSIONS_WA + '?text=' + encodeURIComponent(t);
+  }
+  function sendLead(formEl, btn, successText, onDone) {
+    const url = leadWhatsAppURL(formEl);
+    const original = btn.innerHTML;
+    btn.innerHTML = 'Opening WhatsApp…';
+    btn.disabled = true;
+    const win = window.open(url, '_blank');
+    if (!win) { window.location.href = url; }
+    setTimeout(() => {
+      btn.innerHTML = successText;
+      btn.style.background = '#10b981';
+      formEl.reset();
+      setTimeout(() => { btn.innerHTML = original; btn.style.background = ''; btn.disabled = false; if (onDone) onDone(); }, 2500);
+    }, 800);
+  }
+
   const form = document.getElementById('enquiryForm');
   form?.addEventListener('submit', function (e) {
     e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    const originalText = btn.innerHTML;
-    btn.innerHTML = 'Submitting...';
-    btn.disabled = true;
-
-    // Simulate submission (replace with actual backend)
-    setTimeout(() => {
-      btn.innerHTML = 'Submitted Successfully!';
-      btn.style.background = '#10b981';
-      this.reset();
-      setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.style.background = '';
-        btn.disabled = false;
-      }, 3000);
-    }, 1500);
+    sendLead(this, this.querySelector('button[type="submit"]'), 'Sent! We’ll call you soon');
   });
 
   // ===== PARALLAX SUBTLE EFFECT ON HERO =====
@@ -272,15 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupForm = document.getElementById('popupForm');
   popupForm?.addEventListener('submit', function(e) {
     e.preventDefault();
-    const btn = this.querySelector('button[type="submit"]');
-    btn.textContent = 'Submitting...';
-    btn.disabled = true;
-    setTimeout(() => {
-      btn.textContent = 'Thank you!';
-      btn.style.background = '#10b981';
-      this.reset();
-      setTimeout(() => { closeModal(); btn.textContent = 'Submit Enquiry'; btn.style.background = ''; btn.disabled = false; }, 2000);
-    }, 1500);
+    sendLead(this, this.querySelector('button[type="submit"]'), 'Sent! We’ll call you soon', closeModal);
   });
 
 });
